@@ -16,6 +16,9 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: "Santair | Expert Property Maintenance & AC",
   description: "Quality property maintenance, air conditioning, and home repairs. Approachable, reliable, and expert service.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
