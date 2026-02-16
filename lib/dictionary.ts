@@ -2,32 +2,52 @@ export const translations = {
   en: {
     nav: {
       services: "Services",
-      about: "About Us",
+      about: "Our Story",
       contact: "Contact",
     },
     hero: {
-      title: "Quality Maintenance for Your Home",
-      subtitle: "From expert Air Conditioning service to general repairs, Santair is your trusted neighborhood partner.",
-      cta: "Book a Service",
+      title: "Expert Cooling & Home Care",
+      subtitle: "Your local, family-owned partner for premier Air Conditioning service and reliable property maintenance. Keeping your home comfortable since day one.",
+      cta: "Book an Appointment",
+    },
+    tagline: {
+      ac: "Premier AC Service",
+      family: "Family Owned & Operated"
     },
     form: {
-      title: "Quick Request",
-      location: "Location",
-      serviceType: "Service Type",
-      specificService: "What do you need?",
-      selectLocation: "Select your area",
-      selectType: "Select service category",
-      selectService: "Select specific task",
+      title: "Get a Friendly Quote",
+      location: "Your Area",
+      serviceType: "Service Category",
+      specificService: "How can we help you?",
+      selectLocation: "Where are you located?",
+      selectType: "Pick a category",
+      selectService: "Choose a service",
       name: "Your Name",
       phone: "Phone Number",
-      submit: "Send Request",
-      success: "Thank you! We'll contact you shortly.",
+      submit: "Request Free Quote",
+      success: "Thank you! One of us will reach out to you personally very soon.",
     },
     services: {
       ac: {
-        title: "Air Conditioning",
-        desc: "Installation, maintenance, and expert repairs for all AC units.",
-        options: ["Installation", "Maintenance", "Cleaning", "Repair", "Gas Refill"]
+        title: "Air Conditioning Specialists",
+        desc: "Our core expertise. From high-efficiency installations to emergency repairs and seasonal maintenance, we keep you cool when it matters most.",
+        options: ["New Installation", "Precision Maintenance", "Deep Cleaning", "Emergency Repair", "Gas Refill & Diagnostics"]
+      },
+      others: {
+        title: "Additional Home Services",
+        desc: "Beyond cooling, we offer expert help with the essentials your home needs to run smoothly.",
+        repairs: {
+          title: "Home Repairs",
+          options: ["Furniture Assembly", "Interior Painting", "General Fixes"]
+        },
+        plumbing: {
+          title: "Plumbing",
+          options: ["Leak Detection", "Faucet & Shower", "Water Heaters"]
+        },
+        electrical: {
+          title: "Electrical",
+          options: ["Outlets & Switches", "Lighting", "Panel Safety"]
+        }
       },
       repairs: {
         title: "Home Repairs",
@@ -45,9 +65,9 @@ export const translations = {
         options: ["Short Circuit Fix", "Outlet Change", "Lighting Installation", "Panel Upgrade"]
       }
     },
-    locations: ["North Area", "South Area", "Center", "Suburbs", "Industrial Park"],
+    locations: ["Downtown Orlando", "Winter Park", "Lake Nona", "Kissimmee", "Winter Garden", "Windermere", "Altamonte Springs", "Celebration"],
     testimonial: {
-      quote: "Quality work and great attitude. They fixed my AC and also helped with a plumbing leak on the same visit. Highly recommended!",
+      quote: "Santair feels like having a brother in the business. They fixed my AC in no time and even tightened a loose cabinet door just to be helpful. Truly local expertise.",
       username: "Marc Johnson",
       role: "Homeowner",
     }
@@ -55,32 +75,52 @@ export const translations = {
   es: {
     nav: {
       services: "Servicios",
-      about: "Nosotros",
+      about: "Nuestra Historia",
       contact: "Contacto",
     },
     hero: {
-      title: "Mantenimiento de Calidad para su Hogar",
-      subtitle: "Desde servicio experto de Aire Acondicionado hasta reparaciones generales, Santair es su socio de confianza.",
-      cta: "Solicitar Servicio",
+      title: "Expertos en Climatización y Cuidado del Hogar",
+      subtitle: "Su socio local y familiar para servicios de Aire Acondicionado de primer nivel y mantenimiento confiable. Manteniendo su hogar cómodo desde el primer día.",
+      cta: "Solicitar Cita",
+    },
+    tagline: {
+      ac: "Especialistas en AC",
+      family: "Negocio Familiar"
     },
     form: {
-      title: "Solicitud Rápida",
-      location: "Ubicación",
-      serviceType: "Tipo de Servicio",
-      specificService: "¿Qué necesita?",
-      selectLocation: "Seleccione su zona",
-      selectType: "Seleccione categoría",
-      selectService: "Seleccione tarea específica",
+      title: "Solicite un Presupuesto",
+      location: "Su Zona",
+      serviceType: "Categoría de Servicio",
+      specificService: "¿En qué podemos ayudarle?",
+      selectLocation: "Seleccione su ubicación",
+      selectType: "Elija una categoría",
+      selectService: "Elija un servicio",
       name: "Su Nombre",
       phone: "Número de Teléfono",
-      submit: "Consultar Precio",
-      success: "¡Gracias! Le contactaremos pronto.",
+      submit: "Consultar Precio Gratis",
+      success: "¡Gracias! Le contactaremos personalmente muy pronto.",
     },
     services: {
       ac: {
-        title: "Aire Acondicionado",
-        desc: "Instalación, mantenimiento y reparaciones expertas para unidades de AC.",
-        options: ["Instalación", "Mantenimiento", "Limpieza", "Reparación", "Recarga de Gas"]
+        title: "Especialistas en Aire Acondicionado",
+        desc: "Nuestra especialidad principal. Desde instalaciones de alta eficiencia hasta reparaciones de emergencia y mantenimiento estacional.",
+        options: ["Nueva Instalación", "Mantenimiento de Precisión", "Limpieza Profunda", "Reparación de Emergencia", "Recarga de Gas y Diagnóstico"]
+      },
+      others: {
+        title: "Servicios Adicionales",
+        desc: "Más allá de la climatización, ofrecemos ayuda experta con los servicios esenciales que su hogar necesita.",
+        repairs: {
+          title: "Reparaciones",
+          options: ["Montaje de Muebles", "Pintura Interior", "Arreglos Generales"]
+        },
+        plumbing: {
+          title: "Fontanería",
+          options: ["Detección de Fugas", "Grifería y Duchas", "Calentadores"]
+        },
+        electrical: {
+          title: "Electricidad",
+          options: ["Enchufes e Interruptores", "Iluminación", "Cuadros Eléctricos"]
+        }
       },
       repairs: {
         title: "Reparaciones",
@@ -98,9 +138,9 @@ export const translations = {
         options: ["Cortocircuitos", "Cambio de Enchufes", "Instalación de Luces", "Cuadro Eléctrico"]
       }
     },
-    locations: ["Zona Norte", "Zona Sur", "Centro", "Afueras", "Polígono Industrial"],
+    locations: ["Downtown Orlando", "Winter Park", "Lake Nona", "Kissimmee", "Winter Garden", "Windermere", "Altamonte Springs", "Celebration"],
     testimonial: {
-      quote: "Trabajo de calidad y excelente actitud. Arreglaron mi AC y también me ayudaron con una fuga de agua en la misma visita. ¡Muy recomendables!",
+      quote: "Santair es como tener a un hermano en el negocio. Arreglaron mi AC enseguida y hasta apretaron una puerta suelta del armario solo por ayudar. Auténtica confianza local.",
       username: "Marcos García",
       role: "Propietario",
     }

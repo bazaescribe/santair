@@ -3,7 +3,7 @@
 import { Language, translations } from "@/lib/dictionary";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Wrench, CheckCircle2, ChevronRight, Phone, Star } from "lucide-react";
+import { CheckCircle2, Star } from "lucide-react";
 
 interface HeroProps {
   lang: Language;
@@ -42,8 +42,13 @@ export default function Hero({ lang }: HeroProps) {
             transition={{ duration: 0.8 }}
             style={styles.content}
           >
+            <div style={styles.taglineWrapper}>
+              <span style={styles.tagline}>{t.tagline.ac}</span>
+              <span style={{ ...styles.tagline, backgroundColor: 'rgba(249,115,22,0.1)', color: 'var(--primary-warm)' }}>{t.tagline.family}</span>
+            </div>
+
             <h1 className="hero-title" style={styles.title}>
-              {t.hero.title.toUpperCase()}
+              {t.hero.title}
             </h1>
 
             <p style={styles.subtitle}>{t.hero.subtitle}</p>
@@ -70,15 +75,15 @@ export default function Hero({ lang }: HeroProps) {
         {/* Right Side: Form Card */}
         <div className="hero-form-column" style={styles.formColumn}>
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
             className="hero-form-card"
             style={styles.formCard}
           >
             <div style={styles.formHeader}>
               <h2 style={styles.formTitle}>{t.form.title}</h2>
-              <p style={styles.formSubtitle}>{lang === "en" ? "Please fill out the details" : "Por favor, complete los detalles"}</p>
+              <p style={styles.formSubtitle}>{lang === "en" ? "We usually reply within 5 minutes" : "Respondemos en menos de 5 minutos"}</p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -91,7 +96,7 @@ export default function Hero({ lang }: HeroProps) {
                 >
                   {/* Service Type Pills */}
                   <div style={styles.inputGroup}>
-                    <label style={styles.label}>{t.form.serviceType}*</label>
+                    <label style={styles.label}>{t.form.serviceType}</label>
                     <div style={styles.pills}>
                       {serviceCategories.map(cat => (
                         <button
@@ -128,7 +133,7 @@ export default function Hero({ lang }: HeroProps) {
                     </div>
                   </div>
 
-                  {/* Location & Phone - Stacks on small screens via CSS */}
+                  {/* Location & Phone */}
                   <div className="form-row" style={styles.formRow}>
                     <div className="form-col" style={styles.formCol}>
                       <label style={styles.label}>{t.form.location}*</label>
@@ -162,6 +167,7 @@ export default function Hero({ lang }: HeroProps) {
                   >
                     {t.form.submit}
                   </motion.button>
+                  <p style={styles.formFooter}>{lang === "en" ? "Safe and secure. No hidden fees." : "Seguro y confiable. Sin cargos ocultos."}</p>
                 </motion.form>
               ) : (
                 <motion.div
@@ -173,8 +179,8 @@ export default function Hero({ lang }: HeroProps) {
                   <div style={styles.successIcon}>
                     <CheckCircle2 size={40} color="white" />
                   </div>
-                  <h3>{lang === "en" ? "Thank You!" : "¡Gracias!"}</h3>
-                  <p>{t.form.success}</p>
+                  <h3 style={{ fontFamily: 'var(--font-lora)', fontSize: '1.8rem' }}>{lang === "en" ? "Talk to you soon!" : "¡Hablamos pronto!"}</h3>
+                  <p style={{ marginTop: '10px' }}>{t.form.success}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -187,21 +193,19 @@ export default function Hero({ lang }: HeroProps) {
 
 const styles: Record<string, React.CSSProperties> = {
   hero: {
-    padding: "100px 0",
-    minHeight: "90vh",
+    padding: "120px 0 100px",
+    minHeight: "95vh",
     display: "flex",
     alignItems: "center",
     position: "relative",
-    color: "white",
-    backgroundImage: "linear-gradient(90deg, rgba(10, 25, 49, 0.95) 0%, rgba(10, 25, 49, 0.8) 50%, rgba(10, 25, 49, 0.4) 100%), url('/hero.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundColor: "var(--primary-navy)",
+    color: "var(--primary-navy)",
+    backgroundColor: "var(--bg-offwhite)",
+    overflow: "hidden",
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "1.1fr 0.9fr",
-    gap: "60px",
+    gridTemplateColumns: "1fr 0.9fr",
+    gap: "80px",
     alignItems: "center",
     position: "relative",
     zIndex: 2,
@@ -214,30 +218,48 @@ const styles: Record<string, React.CSSProperties> = {
   content: {
     maxWidth: "600px",
   },
+  taglineWrapper: {
+    display: "flex",
+    gap: "12px",
+    marginBottom: "24px",
+  },
+  tagline: {
+    display: "inline-block",
+    padding: "6px 16px",
+    borderRadius: "100px",
+    backgroundColor: "rgba(0,112,243,0.1)",
+    color: "var(--primary-blue)",
+    fontSize: "0.85rem",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+  },
   title: {
-    fontSize: "4.5rem",
-    fontWeight: "900",
+    fontSize: "4rem",
+    fontWeight: "700",
     lineHeight: "1.1",
     marginBottom: "24px",
-    letterSpacing: "-2px",
+    letterSpacing: "-1.5px",
+    color: "var(--primary-navy)",
+    fontFamily: "var(--font-lora), serif",
   },
   subtitle: {
     fontSize: "1.25rem",
-    lineHeight: "1.5",
+    lineHeight: "1.6",
     marginBottom: "48px",
-    opacity: 0.9,
-    maxWidth: "500px",
+    color: "var(--text-muted)",
+    maxWidth: "520px",
   },
   testimonial: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    backdropFilter: "blur(10px)",
-    padding: "30px",
-    borderRadius: "24px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    backgroundColor: "white",
+    padding: "32px",
+    borderRadius: "28px",
+    border: "1px solid rgba(0,0,0,0.05)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
     display: "flex",
     flexDirection: "column",
     gap: "16px",
-    maxWidth: "500px",
+    maxWidth: "480px",
   },
   testimonialProfile: {
     display: "flex",
@@ -245,11 +267,10 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "16px",
   },
   avatar: {
-    width: "50px",
-    height: "50px",
+    width: "48px",
+    height: "48px",
     borderRadius: "50%",
     overflow: "hidden",
-    border: "2px solid var(--primary-orange)",
   },
   avatarImg: {
     width: "100%",
@@ -262,12 +283,12 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: "4px",
   },
   author: {
-    fontSize: "1rem",
-    fontWeight: "800",
+    fontSize: "0.95rem",
+    fontWeight: "700",
   },
   authorRole: {
-    fontSize: "0.8rem",
-    opacity: 0.7,
+    fontSize: "0.75rem",
+    color: "var(--text-muted)",
     textTransform: "uppercase",
     letterSpacing: "1px",
   },
@@ -275,7 +296,8 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "0.95rem",
     lineHeight: "1.6",
     fontStyle: "italic",
-    opacity: 0.9,
+    color: "var(--primary-navy)",
+    opacity: 0.8,
   },
   formColumn: {
     display: "flex",
@@ -284,26 +306,27 @@ const styles: Record<string, React.CSSProperties> = {
   formCard: {
     backgroundColor: "white",
     padding: "48px",
-    borderRadius: "40px",
+    borderRadius: "var(--radius-lg)",
     width: "100%",
-    maxWidth: "540px",
+    maxWidth: "520px",
     color: "var(--primary-navy)",
-    boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+    boxShadow: "0 40px 120px rgba(0,0,0,0.08)",
+    border: "1px solid rgba(0,0,0,0.02)",
   },
   formHeader: {
-    marginBottom: "32px",
+    marginBottom: "36px",
+    textAlign: "center",
   },
   formTitle: {
-    fontSize: "2.2rem",
-    fontWeight: "900",
-    color: "var(--primary-blue)",
-    marginBottom: "8px",
-    letterSpacing: "-1px",
+    fontSize: "2rem",
+    fontWeight: "700",
+    color: "var(--primary-navy)",
+    marginBottom: "10px",
+    fontFamily: "var(--font-lora), serif",
   },
   formSubtitle: {
-    fontSize: "1rem",
+    fontSize: "0.95rem",
     color: "var(--text-muted)",
-    fontWeight: "600",
   },
   form: {
     display: "flex",
@@ -313,92 +336,107 @@ const styles: Record<string, React.CSSProperties> = {
   inputGroup: {
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "10px",
   },
   label: {
     fontSize: "0.85rem",
-    fontWeight: "800",
+    fontWeight: "700",
+    color: "var(--primary-navy)",
     opacity: 0.8,
-    marginBottom: "4px",
   },
   pills: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "8px",
+    gap: "10px",
   },
   pill: {
-    padding: "10px 16px",
+    padding: "10px 18px",
     borderRadius: "100px",
-    backgroundColor: "#f0f4f8",
+    backgroundColor: "#F1F5F9",
     fontSize: "0.85rem",
-    fontWeight: "700",
+    fontWeight: "600",
     color: "var(--text-muted)",
     transition: "all 0.3s ease",
+    border: "1px solid transparent",
   },
   activePill: {
-    backgroundColor: "var(--primary-blue)",
-    color: "white",
+    backgroundColor: "white",
+    color: "var(--primary-blue)",
+    borderColor: "var(--primary-blue)",
+    boxShadow: "0 4px 12px rgba(0,112,243,0.1)",
   },
   selectWrapper: {
     position: "relative",
   },
   select: {
     width: "100%",
-    padding: "16px 20px",
-    borderRadius: "16px",
-    border: "2px solid #f0f4f8",
-    backgroundColor: "#f9fbff",
+    padding: "18px 24px",
+    borderRadius: "18px",
+    border: "1px solid #E2E8F0",
+    backgroundColor: "#F8FAFC",
     fontSize: "1rem",
     fontWeight: "600",
     color: "var(--primary-navy)",
     appearance: "none",
-    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230A1931'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "right 20px center",
-    backgroundSize: "14px",
+    backgroundPosition: "right 24px center",
+    backgroundSize: "16px",
+    transition: "var(--transition)",
+    outline: "none",
   },
   formRow: {
     display: "flex",
-    gap: "16px",
+    gap: "20px",
   },
   formCol: {
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "10px",
     flex: 1,
   },
   input: {
     width: "100%",
-    padding: "16px 20px",
-    borderRadius: "16px",
-    border: "2px solid #f0f4f8",
-    backgroundColor: "#f9fbff",
+    padding: "18px 24px",
+    borderRadius: "18px",
+    border: "1px solid #E2E8F0",
+    backgroundColor: "#F8FAFC",
     fontSize: "1rem",
     fontWeight: "600",
+    color: "var(--primary-navy)",
+    outline: "none",
+    transition: "var(--transition)",
   },
   submitBtn: {
     backgroundColor: "var(--primary-blue)",
     color: "white",
-    padding: "20px",
-    borderRadius: "18px",
+    padding: "22px",
+    borderRadius: "20px",
     fontSize: "1.1rem",
-    fontWeight: "900",
-    marginTop: "12px",
-    boxShadow: "0 15px 30px rgba(0, 210, 255, 0.3)",
+    fontWeight: "700",
+    marginTop: "8px",
+    boxShadow: "0 10px 25px rgba(0, 112, 243, 0.2)",
     cursor: "pointer",
+  },
+  formFooter: {
+    textAlign: "center",
+    fontSize: "0.8rem",
+    color: "var(--text-muted)",
+    marginTop: "-4px",
   },
   successMsg: {
     textAlign: "center",
     padding: "40px 0",
   },
   successIcon: {
-    width: "80px",
-    height: "80px",
-    backgroundColor: "var(--primary-blue)",
+    width: "72px",
+    height: "72px",
+    backgroundColor: "#10B981",
     borderRadius: "24px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto 24px",
+    boxShadow: "0 10px 20px rgba(16, 185, 129, 0.2)",
   }
 };
