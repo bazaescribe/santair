@@ -27,7 +27,7 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
   return (
     <nav style={{
       ...styles.nav,
-      backgroundColor: scrolled ? "rgba(255, 250, 245, 0.9)" : "transparent",
+      backgroundColor: scrolled ? "var(--bg-offwhite)" : "transparent",
       boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.03)" : "none",
       height: scrolled ? "72px" : "90px",
       borderBottom: scrolled ? "1px solid rgba(0,0,0,0.05)" : "none",
