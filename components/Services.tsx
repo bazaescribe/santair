@@ -2,7 +2,7 @@
 
 import { Language, translations } from "@/lib/dictionary";
 import { motion } from "framer-motion";
-import { Snowflake, Wrench, Droplets, Zap, Shield, Sparkles, CheckCircle2 } from "lucide-react";
+import { Snowflake, Wrench, Droplets, Zap, Sparkles, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
 interface ServicesProps {
@@ -17,11 +17,9 @@ export default function Services({ lang }: ServicesProps) {
       <div className="container">
         {/* Section Header */}
         <div style={styles.header}>
-          <h2 style={styles.title}>{lang === "en" ? "How We Help You" : "Cómo le Ayudamos"}</h2>
+          <h2 style={styles.title}>{t.services.title}</h2>
           <p style={styles.subtitle}>
-            {lang === "en"
-              ? "Expert care for your home's most vital systems, with a focus on keeping you cool."
-              : "Cuidado experto para los sistemas más vitales de su hogar, con enfoque en su comodidad."}
+            {t.services.desc}
           </p>
         </div>
 
@@ -56,25 +54,25 @@ export default function Services({ lang }: ServicesProps) {
           </div>
         </motion.div>
 
-        {/* Other Services Section */}
+        {/* Light Services Section */}
         <div style={styles.subHeader}>
-          <h3 style={styles.subTitle}>{t.services.others.title}</h3>
-          <p style={styles.subDesc}>{t.services.others.desc}</p>
+          <h3 style={styles.subTitle}>{t.services.lightServices.title}</h3>
+          <p style={styles.subDesc}>{t.services.lightServices.desc}</p>
         </div>
 
         <div style={styles.otherGrid}>
-          {/* Repairs */}
+          {/* Electrical */}
           <motion.div
             style={styles.smallCard}
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div style={{ ...styles.smallIconWrapper, backgroundColor: 'rgba(249,115,22,0.1)' }}>
-              <Wrench size={24} color="var(--primary-warm)" />
+            <div style={{ ...styles.smallIconWrapper, backgroundColor: 'rgba(255,107,0,0.1)' }}>
+              <Zap size={24} color="var(--primary-orange)" />
             </div>
-            <h4 style={styles.smallCardTitle}>{t.services.others.repairs.title}</h4>
+            <h4 style={styles.smallCardTitle}>{t.services.lightServices.electric.title}</h4>
             <div style={styles.smallList}>
-              {t.services.others.repairs.options.map((opt: string) => (
+              {t.services.lightServices.electric.options.map((opt: string) => (
                 <span key={opt} style={styles.smallListItem}>• {opt}</span>
               ))}
             </div>
@@ -89,26 +87,26 @@ export default function Services({ lang }: ServicesProps) {
             <div style={{ ...styles.smallIconWrapper, backgroundColor: 'rgba(0,112,243,0.1)' }}>
               <Droplets size={24} color="var(--primary-blue)" />
             </div>
-            <h4 style={styles.smallCardTitle}>{t.services.others.plumbing.title}</h4>
+            <h4 style={styles.smallCardTitle}>{t.services.lightServices.plumbing.title}</h4>
             <div style={styles.smallList}>
-              {t.services.others.plumbing.options.map((opt: string) => (
+              {t.services.lightServices.plumbing.options.map((opt: string) => (
                 <span key={opt} style={styles.smallListItem}>• {opt}</span>
               ))}
             </div>
           </motion.div>
 
-          {/* Electrical */}
+          {/* Maintenance */}
           <motion.div
             style={styles.smallCard}
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div style={{ ...styles.smallIconWrapper, backgroundColor: 'rgba(255,107,0,0.1)' }}>
-              <Zap size={24} color="var(--primary-orange)" />
+            <div style={{ ...styles.smallIconWrapper, backgroundColor: 'rgba(16,185,129,0.1)' }}>
+              <Wrench size={24} color="#10B981" />
             </div>
-            <h4 style={styles.smallCardTitle}>{t.services.others.electrical.title}</h4>
+            <h4 style={styles.smallCardTitle}>{t.services.lightServices.maintenance.title}</h4>
             <div style={styles.smallList}>
-              {t.services.others.electrical.options.map((opt: string) => (
+              {t.services.lightServices.maintenance.options.map((opt: string) => (
                 <span key={opt} style={styles.smallListItem}>• {opt}</span>
               ))}
             </div>
@@ -118,7 +116,7 @@ export default function Services({ lang }: ServicesProps) {
         <div style={styles.ctaBanner}>
           <div style={styles.bannerContent}>
             <Sparkles color="var(--primary-orange)" />
-            <span>{lang === "en" ? "First-time customer? Ask for your 10% welcome discount!" : "¿Cliente nuevo? ¡Pida su 10% de descuento de bienvenida!"}</span>
+            <span>{lang === "en" ? "Need a diagnosis? Ask for our first-time customer special!" : "¿Necesita un diagnóstico? ¡Pregunte por nuestra oferta para nuevos clientes!"}</span>
           </div>
         </div>
       </div>
@@ -230,8 +228,10 @@ const styles: Record<string, React.CSSProperties> = {
     fontFamily: "var(--font-lora), serif",
   },
   subDesc: {
-    fontSize: "1rem",
+    fontSize: "1.1rem",
     color: "var(--text-muted)",
+    maxWidth: "600px",
+    margin: "0 auto",
   },
   otherGrid: {
     display: "grid",

@@ -11,25 +11,31 @@ interface HeroProps {
 
 export default function Hero({ lang }: HeroProps) {
   const t = translations[lang];
-  const [serviceType, setServiceType] = useState<string>("ac");
+  const [category, setCategory] = useState<string>("ac");
   const [specificService, setSpecificService] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [submitted, setSubmitted] = useState(false);
 
-  const serviceCategories = [
+  const categories = [
     { id: "ac", label: t.services.ac.title, options: t.services.ac.options },
-    { id: "repairs", label: t.services.repairs.title, options: t.services.repairs.options },
-    { id: "plumbing", label: t.services.plumbing.title, options: t.services.plumbing.options },
-    { id: "electrical", label: t.services.electrical.title, options: t.services.electrical.options },
+    { id: "electric", label: t.services.lightServices.electric.title, options: t.services.lightServices.electric.options },
+    { id: "plumbing", label: t.services.lightServices.plumbing.title, options: t.services.lightServices.plumbing.options },
+    { id: "maintenance", label: t.services.lightServices.maintenance.title, options: t.services.lightServices.maintenance.options }
   ];
 
-  const currentOptions = serviceCategories.find(c => c.id === serviceType)?.options || [];
+  const currentOptions = categories.find(c => c.id === category)?.options || [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    const phone = t.contact.phone.replace(/\D/g, "");
+    const message = lang === "en"
+      ? `Hi, I need help with ${specificService} in ${location}.`
+      : `Hola, necesito ayuda con ${specificService} en ${location}.`;
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
   };
+
+  const featuredTestimonial = t.testimonials[0];
 
   return (
     <section style={styles.hero}>
@@ -57,17 +63,17 @@ export default function Hero({ lang }: HeroProps) {
             <div style={styles.testimonial}>
               <div style={styles.testimonialProfile}>
                 <div style={styles.avatar}>
-                  <img src="https://ui-avatars.com/api/?name=Marc+Johnson&background=FF6B00&color=fff" alt="User" style={styles.avatarImg} />
+                  <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=FF6B00&color=fff" alt="User" style={styles.avatarImg} />
                 </div>
                 <div>
                   <div style={styles.stars}>
-                    {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="var(--primary-orange)" color="var(--primary-orange)" />)}
+                    {[...Array(featuredTestimonial.stars)].map((_, i) => <Star key={i} size={14} fill="var(--primary-orange)" color="var(--primary-orange)" />)}
                   </div>
-                  <p style={styles.author}>{t.testimonial.username}</p>
-                  <p style={styles.authorRole}>{t.testimonial.role}</p>
+                  <p style={styles.author}>{featuredTestimonial.name}</p>
+                  <p style={styles.authorRole}>{featuredTestimonial.city} • {featuredTestimonial.service}</p>
                 </div>
               </div>
-              <p style={styles.quote}>"{t.testimonial.quote}"</p>
+              <p style={styles.quote}>"{featuredTestimonial.quote}"</p>
             </div>
           </motion.div>
         </div>
@@ -86,104 +92,74 @@ export default function Hero({ lang }: HeroProps) {
               <p style={styles.formSubtitle}>{lang === "en" ? "We usually reply within 5 minutes" : "Respondemos en menos de 5 minutos"}</p>
             </div>
 
-            <AnimatePresence mode="wait">
-              {!submitted ? (
-                <motion.form
-                  key="form"
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  onSubmit={handleSubmit}
-                  style={styles.form}
-                >
-                  {/* Service Type Pills */}
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>{t.form.serviceType}</label>
-                    <div style={styles.pills}>
-                      {serviceCategories.map(cat => (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          onClick={() => {
-                            setServiceType(cat.id);
-                            setSpecificService("");
-                          }}
-                          style={{
-                            ...styles.pill,
-                            ...(serviceType === cat.id ? styles.activePill : {})
-                          }}
-                        >
-                          {cat.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+            <form
+              onSubmit={handleSubmit}
+              style={styles.form}
+            >
 
-                  {/* Specific Service Dropdown */}
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>{t.form.specificService}*</label>
-                    <div style={styles.selectWrapper}>
-                      <select
-                        required
-                        value={specificService}
-                        onChange={(e) => setSpecificService(e.target.value)}
-                        style={styles.select}
-                      >
-                        <option value="">{t.form.selectService}</option>
-                        {currentOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Location & Phone */}
-                  <div className="form-row" style={styles.formRow}>
-                    <div className="form-col" style={styles.formCol}>
-                      <label style={styles.label}>{t.form.location}*</label>
-                      <select
-                        required
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        style={styles.select}
-                      >
-                        <option value="">{t.form.selectLocation}</option>
-                        {t.locations.map(loc => <option key={loc} value={loc}>{loc}</option>)}
-                      </select>
-                    </div>
-
-                    <div className="form-col" style={styles.formCol}>
-                      <label style={styles.label}>{t.form.phone}*</label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="+34 ..."
-                        style={styles.input}
-                      />
-                    </div>
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    style={styles.submitBtn}
+              {/* Category Dropdown */}
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>{t.form.serviceType}*</label>
+                <div style={styles.selectWrapper}>
+                  <select
+                    required
+                    value={category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      setSpecificService("");
+                    }}
+                    style={styles.select}
                   >
-                    {t.form.submit}
-                  </motion.button>
-                  <p style={styles.formFooter}>{lang === "en" ? "Safe and secure. No hidden fees." : "Seguro y confiable. Sin cargos ocultos."}</p>
-                </motion.form>
-              ) : (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={styles.successMsg}
-                >
-                  <div style={styles.successIcon}>
-                    <CheckCircle2 size={40} color="white" />
-                  </div>
-                  <h3 style={{ fontFamily: 'var(--font-lora)', fontSize: '1.8rem' }}>{lang === "en" ? "Talk to you soon!" : "¡Hablamos pronto!"}</h3>
-                  <p style={{ marginTop: '10px' }}>{t.form.success}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    {categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              {/* Specific Service Dropdown */}
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>{t.form.specificService}*</label>
+                <div style={styles.selectWrapper}>
+                  <select
+                    required
+                    value={specificService}
+                    onChange={(e) => setSpecificService(e.target.value)}
+                    style={styles.select}
+                  >
+                    <option value="">{t.form.selectService}</option>
+                    {currentOptions.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              {/* Location Dropdown */}
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>{t.form.location}*</label>
+                <div style={styles.selectWrapper}>
+                  <select
+                    required
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    style={styles.select}
+                  >
+                    <option value="">{t.form.selectLocation}</option>
+                    {t.locations.map(loc => <option key={loc} value={loc}>{loc}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                style={{ ...styles.submitBtn, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                </svg>
+                {lang === "en" ? "Book via WhatsApp" : "Agendar por WhatsApp"}
+              </motion.button>
+              <p style={styles.formFooter}>{lang === "en" ? "Fast response directly to your phone." : "Respuesta rápida directamente a su teléfono."}</p>
+            </form>
           </motion.div>
         </div>
       </div>
@@ -344,27 +320,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: "var(--primary-navy)",
     opacity: 0.8,
   },
-  pills: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "10px",
-  },
-  pill: {
-    padding: "10px 18px",
-    borderRadius: "100px",
-    backgroundColor: "#F1F5F9",
-    fontSize: "0.85rem",
-    fontWeight: "600",
-    color: "var(--text-muted)",
-    transition: "all 0.3s ease",
-    border: "1px solid transparent",
-  },
-  activePill: {
-    backgroundColor: "white",
-    color: "var(--primary-blue)",
-    borderColor: "var(--primary-blue)",
-    boxShadow: "0 4px 12px rgba(0,112,243,0.1)",
-  },
+
   selectWrapper: {
     position: "relative",
   },

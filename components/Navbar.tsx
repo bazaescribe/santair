@@ -3,7 +3,7 @@
 import { Language, translations } from "@/lib/dictionary";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Wind, Globe } from "lucide-react";
+import { Wind, Globe, Phone, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -45,10 +45,12 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
         </Link>
 
         <div style={styles.links}>
-          <a href="#services" style={styles.link}>{t.services}</a>
-          <a href="#contact" style={styles.link}>{t.contact}</a>
+          <a href="#services" className="nav-section-link" style={styles.link}>{t.services}</a>
+          <a href="#why-us" className="nav-section-link" style={styles.link}>{t.whyUs}</a>
+          <a href="#about" className="nav-section-link" style={styles.link}>{t.about}</a>
+          <a href="#contact" className="nav-section-link" style={styles.link}>{t.contact}</a>
 
-          <div style={styles.divider}></div>
+          <div className="nav-section-link" style={styles.divider}></div>
 
           <button
             onClick={() => setLang(lang === "en" ? "es" : "en")}
@@ -58,8 +60,27 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
             <Globe size={18} />
             <span>{lang === "en" ? "ES" : "EN"}</span>
           </button>
+
+          <div className="nav-contact-btns" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <a href={`tel:${translations[lang].contact.phone}`} style={styles.navCallBtn} aria-label="Call Now">
+              <Phone size={14} fill="currentColor" />
+              <span>{lang === "en" ? "Call" : "Llamar"}</span>
+            </a>
+            <a href={`https://wa.me/1${translations[lang].contact.phone.replace(/\\D/g, '')}`} target="_blank" rel="noopener noreferrer" style={styles.navWaBtn} aria-label="WhatsApp">
+              <MessageCircle size={14} fill="currentColor" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @media (max-width: 768px) {
+          .nav-contact-btns, .nav-section-link {
+            display: none !important;
+          }
+        }
+      `}} />
     </nav>
   );
 }
@@ -133,5 +154,33 @@ const styles: Record<string, React.CSSProperties> = {
     transition: "var(--transition)",
     border: "1px solid rgba(0,0,0,0.1)",
     boxShadow: "0 2px 10px rgba(0,0,0,0.02)",
+  },
+  navCallBtn: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "8px 16px",
+    borderRadius: "100px",
+    backgroundColor: "var(--primary-blue, #0070f3)",
+    color: "white",
+    fontSize: "0.85rem",
+    fontWeight: "700",
+    textDecoration: "none",
+    transition: "var(--transition)",
+    boxShadow: "0 2px 10px rgba(0,112,243,0.2)",
+  },
+  navWaBtn: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "8px 16px",
+    borderRadius: "100px",
+    backgroundColor: "#25D366",
+    color: "white",
+    fontSize: "0.85rem",
+    fontWeight: "700",
+    textDecoration: "none",
+    transition: "var(--transition)",
+    boxShadow: "0 2px 10px rgba(37,211,102,0.2)",
   }
 };

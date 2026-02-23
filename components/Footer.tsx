@@ -13,6 +13,16 @@ export default function Footer({ lang }: FooterProps) {
 
   return (
     <footer id="contact" style={styles.footer}>
+      <div style={styles.ctaBanner}>
+        <div className="container" style={styles.ctaContainer}>
+          <h2 style={styles.ctaTitle}>{t.bottomCta.title}</h2>
+          <p style={styles.ctaDesc}>{t.bottomCta.desc}</p>
+          <a href="#hero" style={styles.ctaButton}>
+            {t.bottomCta.button}
+          </a>
+        </div>
+      </div>
+
       <div className="container" style={styles.grid}>
         <div style={styles.brand}>
           <div style={styles.logo}>
@@ -33,31 +43,30 @@ export default function Footer({ lang }: FooterProps) {
           <h4 style={styles.colTitle}>{lang === "en" ? "Contact Us" : "Contacto"}</h4>
           <div style={styles.contactItem}>
             <div style={styles.contactIcon}><Phone size={16} /></div>
-            <span>+34 600 000 000</span>
+            <span>{t.contact.phone}</span>
           </div>
           <div style={styles.contactItem}>
             <div style={styles.contactIcon}><Mail size={16} /></div>
-            <span>hello@santair.com</span>
+            <span>{t.contact.email}</span>
           </div>
           <div style={styles.contactItem}>
             <div style={styles.contactIcon}><MapPin size={16} /></div>
-            <span>Calle Principal, 12, BCN</span>
+            <span>{t.contact.address}</span>
           </div>
         </div>
 
         <div style={styles.col}>
           <h4 style={styles.colTitle}>{lang === "en" ? "Availability" : "Disponibilidad"}</h4>
-          <p style={styles.text}>{lang === "en" ? "Mon - Fri: 8:00 - 18:00" : "Lun - Vie: 8:00 - 18:00"}</p>
-          <p style={styles.text}>{lang === "en" ? "Sat: 9:00 - 14:00" : "Sáb: 9:00 - 14:00"}</p>
+          <p style={styles.text}>{t.contact.hours}</p>
           <div style={styles.emergencyTag}>
             <span style={styles.emergencyPulse}></span>
-            <strong>{lang === "en" ? "Emergency 24/7 Available" : "Urgencias 24/7 Disponibles"}</strong>
+            <strong>{t.contact.emergency}</strong>
           </div>
         </div>
       </div>
       <div style={styles.bottom}>
         <div className="container" style={styles.bottomContainer}>
-          <p style={styles.copy}>© {new Date().getFullYear()} Santair & Co. {lang === "en" ? "Home Comfort Specialists." : "Especialistas en Confort."}</p>
+          <p style={styles.copy}>© {new Date().getFullYear()} Santair. {lang === "en" ? "Orlando's AC Specialists." : "Especialistas en AC en Orlando."}</p>
         </div>
       </div>
     </footer>
@@ -68,7 +77,45 @@ const styles: Record<string, React.CSSProperties> = {
   footer: {
     backgroundColor: "var(--primary-navy)",
     color: "rgba(255,255,255,0.7)",
-    padding: "100px 0 0 0",
+    padding: "0",
+  },
+  ctaBanner: {
+    backgroundColor: "var(--primary-blue)",
+    padding: "80px 0",
+    marginBottom: "100px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  ctaContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    gap: "24px",
+  },
+  ctaTitle: {
+    color: "white",
+    fontSize: "2.8rem",
+    fontWeight: "700",
+    fontFamily: "var(--font-lora), serif",
+  },
+  ctaDesc: {
+    color: "rgba(255,255,255,0.9)",
+    fontSize: "1.1rem",
+    maxWidth: "600px",
+    lineHeight: "1.6",
+  },
+  ctaButton: {
+    backgroundColor: "white",
+    color: "var(--primary-blue)",
+    padding: "18px 36px",
+    borderRadius: "100px",
+    fontWeight: "700",
+    textDecoration: "none",
+    fontSize: "1.1rem",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+    marginTop: "16px",
+    display: "inline-block",
   },
   grid: {
     display: "grid",
