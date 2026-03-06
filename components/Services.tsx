@@ -30,12 +30,13 @@ export default function Services({ lang }: ServicesProps) {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           style={styles.featuredCard}
+          className="services-featured-card"
         >
-          <div style={styles.featuredContent}>
+          <div style={styles.featuredContent} className="services-featured-content">
             <div style={styles.featuredIconWrapper}>
               <Snowflake size={40} color="var(--primary-blue)" />
             </div>
-            <h3 style={styles.featuredTitle}>{t.services.ac.title}</h3>
+            <h3 style={styles.featuredTitle} className="services-featured-title">{t.services.ac.title}</h3>
             <p style={styles.featuredDesc}>{t.services.ac.desc}</p>
             <div style={styles.featuredGrid}>
               {t.services.ac.options.map((opt: string) => (
@@ -46,7 +47,7 @@ export default function Services({ lang }: ServicesProps) {
               ))}
             </div>
           </div>
-          <div style={styles.featuredImageWrapper}>
+          <div style={styles.featuredImageWrapper} className="services-featured-image-wrapper">
             <div style={styles.imagePlaceholder}>
               {/* This would be an image of an AC unit or a technician */}
               <Image src="/mascot.jpeg" alt="AC" fill style={{ objectFit: "cover" }} />
@@ -147,8 +148,6 @@ const styles: Record<string, React.CSSProperties> = {
     margin: "0 auto",
   },
   featuredCard: {
-    display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
     backgroundColor: "var(--bg-offwhite)",
     borderRadius: "var(--radius-lg)",
     overflow: "hidden",

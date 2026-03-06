@@ -115,8 +115,8 @@ const styles: Record<string, React.CSSProperties> = {
     paddingLeft: "32px", // Initial gap so the first item has space from edge if needed, or consistent spacing
   },
   photoWrapper: {
-    width: "320px",
-    height: "240px",
+    width: "480px",
+    height: "360px",
     flexShrink: 0,
     position: "relative",
     cursor: "pointer",

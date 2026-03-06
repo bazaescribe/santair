@@ -14,7 +14,7 @@ export default function About({ lang }: AboutProps) {
   return (
     <section id="about" style={styles.section}>
       <div className="container">
-        <div style={styles.grid}>
+        <div style={styles.grid} className="about-grid">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -48,9 +48,10 @@ export default function About({ lang }: AboutProps) {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             style={styles.imageWrapper}
+            className="about-image-wrapper"
           >
-            <div style={styles.imageOverlay}>
-              <div style={styles.storyCard}>
+            <div style={styles.imageOverlay} className="about-image-overlay">
+              <div style={styles.storyCard} className="about-story-card">
                 <div style={styles.iconCircle}>
                   <Heart size={24} color="white" fill="white" />
                 </div>
@@ -65,9 +66,9 @@ export default function About({ lang }: AboutProps) {
               </div>
             </div>
             {/* Visual placeholder for a real photo of the owners/team */}
-            <div style={styles.photoPlaceholder}>
+            <div style={styles.photoPlaceholder} className="about-photo-placeholder">
               <img
-                src="https://images.unsplash.com/photo-1581092921461-39b9d08a9b21?auto=format&fit=crop&q=80&w=800"
+                src="/contractor.jpg"
                 alt="About SantAir"
                 style={styles.img}
               />
@@ -86,10 +87,6 @@ const styles: Record<string, React.CSSProperties> = {
     overflow: "hidden",
   },
   grid: {
-    display: "grid",
-    gridTemplateColumns: "1.1fr 0.9fr",
-    gap: "80px",
-    alignItems: "center",
   },
   content: {
     maxWidth: "560px",
