@@ -45,10 +45,10 @@ export default function Footer({ lang }: FooterProps) {
             <div style={styles.contactIcon}><Phone size={16} /></div>
             <span>{t.contact.phone}</span>
           </div>
-          <div style={styles.contactItem}>
+          {/* <div style={styles.contactItem}>
             <div style={styles.contactIcon}><Mail size={16} /></div>
             <span>{t.contact.email}</span>
-          </div>
+          </div> */}
           <div style={styles.contactItem}>
             <div style={styles.contactIcon}><MapPin size={16} /></div>
             <span>{t.contact.address}</span>
